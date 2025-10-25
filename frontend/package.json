@@ -1,0 +1,60 @@
+{
+  "name": "tokenized-asset-frontend",
+  "version": "1.0.0",
+  "description": "Frontend pour la plateforme Tokenized Asset Management",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+  "test": "jest --passWithNoTests",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@reown/appkit": "^1.8.11",
+    "@reown/appkit-adapter-wagmi": "^1.8.11",
+  "@tanstack/react-query": "^5.90.5",
+    "clsx": "^2.0.0",
+    "ethers": "^6.15.0",
+    "lucide-react": "^0.294.0",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "viem": "^2.38.4",
+    "wagmi": "^2.18.2"
+  },
+  "devDependencies": {
+  "@testing-library/jest-dom": "^6.0.1",
+  "@testing-library/react": "^14.0.0",
+  "@types/jest": "^29.5.5",
+  "@swc/jest": "^0.2.31",
+  "jest": "^29.7.0",
+  "jest-environment-jsdom": "^29.7.0",
+  "msw": "^1.2.3",
+  "cross-fetch": "^3.1.8",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.42",
+    "@types/react-dom": "^18.2.17",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.4",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.2"
+  },
+  "keywords": [
+    "nextjs",
+    "react",
+    "ethereum",
+    "blockchain",
+    "defi",
+    "tokenization"
+  ],
+  "author": "Tokenized Asset Platform",
+  "license": "MIT"
+}

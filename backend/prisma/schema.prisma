@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  address       String   @unique
+  isWhitelisted Boolean  @default(false)
+  isBlacklisted Boolean  @default(false)
+  kycStatus     String   @default("pending") // pending, approved, rejected
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  email         String?
+  // Relations
+  transfersFrom TransferEvent[] @relation("TransferFrom")
+  transfersTo   TransferEvent[] @relation("TransferTo")
+  
+  @@map("users")
+}
+
+model Token {
+  id            String   @id @default(cuid())
+  type          TokenType
+  contractAddress String @unique
+  symbol        String
+  name          String
+  totalSupply   BigInt   @default(0)
+  decimals      Int      @default(18)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  transfers     TransferEvent[]
+  
+  @@map("tokens")
+}
+
+model TransferEvent {
+  id            String   @id @default(cuid())
+  txHash        String
+  fromAddress   String
+  toAddress     String
+  tokenAddress  String
+  tokenId       String? // Pour les NFTs
+  amount        BigInt? // Pour les ERC20
+  blockNumber   BigInt
+  logIndex      Int
+  timestamp     DateTime
+  createdAt     DateTime @default(now())
+  
+  // Relations
+  from          User     @relation("TransferFrom", fields: [fromAddress], references: [address])
+  to            User     @relation("TransferTo", fields: [toAddress], references: [address])
+  token         Token    @relation(fields: [tokenAddress], references: [contractAddress])
+  
+  @@unique([txHash, logIndex])
+  @@map("transfer_events")
+}
+
+model OraclePrice {
+  id        String   @id @default(cuid())
+  price     BigInt
+  timestamp DateTime
+  txHash    String
+  blockNumber BigInt
+  createdAt DateTime @default(now())
+  
+  @@map("oracle_prices")
+}
+
+model KycEvent {
+  id        String   @id @default(cuid())
+  userAddress String
+  action    String   // whitelist_added, whitelist_removed, blacklist_added, blacklist_removed
+  txHash    String
+  blockNumber BigInt
+  timestamp DateTime
+  createdAt DateTime @default(now())
+  
+  
+  @@map("kyc_events")
+}
+
+enum TokenType {
+  ERC20
+  ERC721
+}

@@ -1,0 +1,88 @@
+{
+  "name": "tokenized-asset-management-platform",
+  "version": "1.0.0",
+  "description": "Plateforme complète de gestion d'actifs tokenisés avec contrôle KYC, trading DEX et oracle de prix",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:contracts": "cd contracts && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "build:all": "npm run build:backend && npm run build:frontend",
+    "build:contracts": "cd contracts && forge build",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "test:all": "npm run test:contracts && npm run test:backend",
+    "test:contracts": "cd contracts && forge test",
+    "test:backend": "cd backend && npm run test",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:indexer\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:indexer\"",
+    "start:backend": "cd backend && npm run start",
+    "start:indexer": "cd backend && npm run indexer",
+    "start:frontend": "cd frontend && npm run start",
+    "deploy:contracts": "cd contracts && forge script script/Deploy.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $DEPLOYER_PRIVATE_KEY --broadcast",
+    "verify:contracts": "cd contracts && forge verify-contract --chain sepolia --watch",
+    "migrate:db": "cd backend && npm run prisma:migrate",
+    "generate:db": "cd backend && npm run prisma:generate",
+    "studio:db": "cd backend && npm run prisma:studio",
+    "oracle:push": "cd backend && npm run oracle:push",
+    "lint:all": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "format:all": "npm run format:backend && npm run format:frontend",
+    "format:backend": "cd backend && npm run format",
+    "format:frontend": "cd frontend && npm run format",
+    "clean:all": "npm run clean:contracts && npm run clean:backend && npm run clean:frontend",
+    "clean:contracts": "cd contracts && rm -rf out cache lib",
+    "clean:backend": "cd backend && rm -rf dist node_modules",
+    "clean:frontend": "cd frontend && rm -rf .next out node_modules",
+    "setup:dev": "npm run install:all && npm run migrate:db && npm run generate:db",
+    "setup:prod": "npm run install:all && npm run build:all && npm run migrate:db && npm run generate:db",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "health:check": "curl -f http://localhost:3001/health && curl -f http://localhost:3000",
+    "docs:generate": "npm run docs:contracts && npm run docs:backend && npm run docs:frontend",
+    "docs:contracts": "cd contracts && forge doc",
+    "docs:backend": "cd backend && npx typedoc src",
+    "docs:frontend": "cd frontend && npx typedoc src"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "solidity",
+    "defi",
+    "tokenization",
+    "kyc",
+    "trading",
+    "oracle",
+    "nextjs",
+    "prisma",
+    "foundry"
+  ],
+  "author": "Tokenized Asset Management Platform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/tokenized-asset-management-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/tokenized-asset-management-platform/issues"
+  },
+  "homepage": "https://github.com/your-username/tokenized-asset-management-platform#readme",
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "axios": "^1.12.2",
+    "next": "^16.0.0"
+  }
+}

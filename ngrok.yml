@@ -1,0 +1,34 @@
+# Ngrok Configuration for Backend
+# Place this file at: ~/.ngrok2/ngrok.yml
+
+version: "2"
+authtoken: 34YhmHnNvup47qZtRZnYAxThE7E_Bzk4pv9ny1RWtUSmbp2g
+
+tunnels:
+  backend:
+    proto: http
+    addr: 3001
+    inspect: true
+
+  backend-dev:
+    proto: http
+    addr: 3001
+
+# Free tier configuration (no custom subdomain)
+# Just use: ngrok http 3001
+
+# Logging
+log_level: info
+log_format: json
+log: /tmp/ngrok.log
+
+# Web Interface
+web_addr: localhost:4040
+
+# Region (choose closest to you)
+# Options: us, eu, ap, au, sa, jp, in
+region: eu
+
+# Connection settings
+console_ui: true
+console_ui_color: transparent
